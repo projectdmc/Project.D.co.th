@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project D - Initial D Racing</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: #3a3a3a; /* สีเทา */
+      color: white;
+      text-align: center;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      text-shadow: 2px 2px 10px black;
+      margin-bottom: 20px;
+      z-index: 2;
+    }
+
+    .btn {
+      background: rgba(255,255,255,0.1);
+      border: 2px solid white;
+      padding: 15px 30px;
+      margin: 10px;
+      border-radius: 12px;
+      font-size: 1.2rem;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+      z-index: 2;
+    }
+
+    .btn:hover {
+      background: white;
+      color: black;
+    }
+
+    /* ปุ่มควบคุมเพลง */
+    .music-toggle {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      padding: 10px 20px;
+      background: rgba(0,0,0,0.6);
+      border: 2px solid white;
+      border-radius: 8px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      z-index: 3;
+    }
+
+    .music-toggle:hover {
+      background: white;
+      color: black;
+    }
+
+    /* Popup */
+    .popup {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 5;
+    }
+
+    .popup-content {
+      background: #222;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+
+    .popup-content h2 {
+      margin-bottom: 20px;
+    }
+
+    .popup-content button {
+      padding: 10px 20px;
+      border: none;
+      background: crimson;
+      color: white;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .popup-content button:hover {
+      background: darkred;
+    }
+
+    /* ยานพาหนะ (emoji) */
+    .vehicle {
+      position: absolute;
+      font-size: 2rem;
+      top: 0;
+      right: -100px;
+      animation: drive-left linear forwards;
+    }
+
+    @keyframes drive-left {
+      from { right: -100px; }
+      to { right: 110%; }
+    }
+
+    /* เพลง */
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- ปุ่มเปิดปิดเพลง -->
+  <button class="music-toggle" onclick="toggleMusic()">🔊 ปิดเพลง</button>
+
+  <h1>🚗 Project D 🚗</h1>
+  
+  <button class="btn" onclick="joinMinecraft()">เข้าร่วมเกม (Minecraft)</button>
+  <button class="btn" onclick="openPopup()">เข้าร่วมเกม (CarX Street)</button>
+  <button class="btn" onclick="joinDiscord()">เข้าร่วม Discord</button>
+
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <h2>ตอนนี้ยังไม่พร้อมใช้บริการ<br>โปรดติดตามในเร็วๆนี้</h2>
+      <button onclick="closePopup()">ปิด</button>
+    </div>
+  </div>
+
+  <!-- เพลง Eurobeat -->
+  <audio id="bg-music" autoplay loop>
+    <source src="585.mp3" type="audio/mpeg">
+    เบราว์เซอร์คุณไม่รองรับการเล่นเพลง
+  </audio>
+
+  <script>
+    const music = document.getElementById("bg-music");
+    const musicBtn = document.querySelector(".music-toggle");
+    let isPlaying = true;
+
+    function toggleMusic() {
+      if (isPlaying) {
+        music.pause();
+        musicBtn.textContent = "🔈 เปิดเพลง";
+      } else {
+        music.play();
+        musicBtn.textContent = "🔊 ปิดเพลง";
+      }
+      isPlaying = !isPlaying;
+    }
+
+    function joinMinecraft() {
+      window.location.href = "minecraft://?addExternalServer=ProjectD|play.projectd-mc.com:19132";
+    }
+
+    function openPopup() {
+      document.getElementById("popup").style.display = "flex";
+    }
+
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+    }
+
+    function joinDiscord() {
+      window.location.href = "https://discord.gg/xRRpduTs";
+    }
+  </script>
+</body>
+</html>
